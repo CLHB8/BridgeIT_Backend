@@ -32,7 +32,7 @@ npm install
 ```
 mongod --dbpath relative/path/to/database
 ```
-* Create all database schemes and import data to begin with
+* Create all database schemes and import data to begin with (in the folder sebamaster-movie-backend)
 ```
 mongorestore dump/
 ```
