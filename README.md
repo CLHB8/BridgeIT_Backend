@@ -1,6 +1,6 @@
-# sebamaster-movie-backend application
+# BridgeIT-Backend application
 
-sebamaster-movie-frontend application can be found [here](https://github.com/sebischair/sebamaster-movie-frontend)
+BridgeIT-Frontend application can be found [here](https://github.com/CLHB8/BridgeIT_Frontend)
 
 ## Prerequisites
 
