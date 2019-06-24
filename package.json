@@ -1,19 +1,16 @@
 {
-  "name": "sebamaster-movie-backend",
+  "name": "bridge-it-backend",
   "version": "1.0.0",
-  "description": "EBAMaster movie backend as a service",
+  "description": "Backend for online platform BridgeIT",
   "main": "index.js",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/sebischair/sebamaster-movie-backend.git"
+    "url": "https://github.com/CLHB8/BridgeIT_Backend.git"
   },
-  "author": "sebischair",
+  "author": "Team23",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sebischair/sebamaster-movie-backend/issues"
-  },
-  "homepage": "ttps://github.com/sebischair/sebamaster-movie-backend.git#readme",
+  "homepage": "https://github.com/CLHB8/BridgeIT_Backend.git#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./index.js",
@@ -25,7 +22,7 @@
     "express": "4.16.2",
     "helmet": "3.11.0",
     "jsonwebtoken": "8.1.1",
-    "mongoose": "5.0.7"
+    "mongoose": "^5.6.0"
   },
   "devDependencies": {
     "nodemon": "1.14.12"
