@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 // Define the movie schema
 
 const SeniorRequestSchema  = new mongoose.Schema({
+    id: String,
+    title: String,
     category: String,
-    specification: String,
-    location: String
+    specification: String
 });
 
 // Export the SeniorRequest model
