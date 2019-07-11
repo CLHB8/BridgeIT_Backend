@@ -17,15 +17,31 @@ const create = (req, res) => {
         }));
 };
 
-const read   = (req, res) => {
+    const read   = (req, res) => {
     RequestModel.findById(req.params.id).exec()
         .then(request => {
 
             if (!request) return res.status(404).json({
                 error: 'Not Found',
-                message: `Request not found`
+                message: 'Request not found'
             });
 
+            res.status(200).json(request)
+
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+
+};
+const readUser   = (req, res) => {
+    RequestModel.find(req.body.userId).exec()
+        .then(request => {
+            if (!request) return res.status(404).json({
+                error: 'Not Found',
+                message: `Request not found`
+            });
             res.status(200).json(request)
 
         })
@@ -78,6 +94,7 @@ const list  = (req, res) => {
 module.exports = {
     create,
     read,
+    readUser,
     update,
     remove,
     list
