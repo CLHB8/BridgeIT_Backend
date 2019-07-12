@@ -10,6 +10,7 @@ const RequestController = require('../controllers/request');
 router.get('/', RequestController.list); // List all movies
 router.post('/', middlewares.checkAuthentication, RequestController.create); // Create a new request
 router.get('/:id', RequestController.read); // Read a movie by Id
+router.get('/:id', RequestController.readUser); // Read a movie by userId
 router.put('/:id', middlewares.checkAuthentication, RequestController.update); // Update a request by Id
 router.delete('/:id', middlewares.checkAuthentication, RequestController.remove); // Delete a request by Id
 
