@@ -18,9 +18,8 @@ const create = (req, res) => {
 };
 
     const read   = (req, res) => {
-    RequestModel.findById(req.params.id).exec()
+    RequestModel.find({userId: req.params.id}).exec()
         .then(request => {
-
             if (!request) return res.status(404).json({
                 error: 'Not Found',
                 message: 'Request not found'
@@ -35,12 +34,12 @@ const create = (req, res) => {
         }));
 
 };
-const readUser   = (req, res) => {
-    RequestModel.find(req.body.userId).exec()
+    const readUser   = (req, res) => {
+    RequestModel.find({userId: req.params.id}).exec()
         .then(request => {
             if (!request) return res.status(404).json({
                 error: 'Not Found',
-                message: `Request not found`
+                message: `Request not found  mal 3`
             });
             res.status(200).json(request)
 
