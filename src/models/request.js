@@ -19,6 +19,9 @@ const RequestSchema  = new mongoose.Schema({
     },
     userId:{
         type:String,
+    },
+    senUserName:{
+        type: String,
     }
 });
 

@@ -1,6 +1,6 @@
 "use strict";
 
-const RequestModel = require('../models/request');
+const StuOfferModel = require('../models/stuOffer');
 
 
 const create = (req, res) => {
@@ -9,7 +9,7 @@ const create = (req, res) => {
         message: 'The request body is empty'
     });
 
-    RequestModel.create(req.body)
+    StuOfferModel.create(req.body)
         .then(request => res.status(201).json(request))
         .catch(error => res.status(500).json({
             error: 'Internal server error',
@@ -17,31 +17,16 @@ const create = (req, res) => {
         }));
 };
 
-    const read   = (req, res) => {
-    RequestModel.findById(req.params.id).exec()
-        .then(request => {
-            if (!request) return res.status(404).json({
+const read   = (req, res) => {
+    StuOfferModel.findById(req.params.id).exec()
+        .then(stuOffer => {
+
+            if (!stuOffer) return res.status(404).json({
                 error: 'Not Found',
-                message: 'Request not found'
+                message: `stuOffer not found`
             });
 
-            res.status(200).json(request)
-
-        })
-        .catch(error => res.status(500).json({
-            error: 'Internal Server Error',
-            message: error.message
-        }));
-
-};
-    const readMy   = (req, res) => {
-    RequestModel.find({userId: req.params.id}).exec()
-        .then(request => {
-            if (!request) return res.status(404).json({
-                error: 'Not Found',
-                message: `Request not found  mal 3`
-            });
-            res.status(200).json(request)
+            res.status(200).json(stuOffer)
 
         })
         .catch(error => res.status(500).json({
@@ -60,10 +45,10 @@ const update = (req, res) => {
         });
     }
 
-    RequestModel.findByIdAndUpdate(req.params.id,req.body,{
+    StuOfferModel.findByIdAndUpdate(req.params.id,req.body,{
         new: true,
         runValidators: true}).exec()
-        .then(request => res.status(200).json(request))
+        .then(stuOffer => res.status(200).json(stuOffer))
         .catch(error => res.status(500).json({
             error: 'Internal server error',
             message: error.message
@@ -71,8 +56,8 @@ const update = (req, res) => {
 };
 
 const remove = (req, res) => {
-    RequestModel.findByIdAndRemove(req.params.id).exec()
-        .then(() => res.status(200).json({message: `Request with id${req.params.id} was deleted`}))
+    StuOfferModel.findByIdAndRemove(req.params.id).exec()
+        .then(() => res.status(200).json({message: `Your Student Offer with id${req.params.id} was deleted`}))
         .catch(error => res.status(500).json({
             error: 'Internal server error',
             message: error.message
@@ -80,8 +65,8 @@ const remove = (req, res) => {
 };
 
 const list  = (req, res) => {
-    RequestModel.find({}).exec()
-        .then(requests => res.status(200).json(requests))
+    StuOfferModel.find({}).exec()
+        .then(stuOffers => res.status(200).json(stuOffers))
         .catch(error => res.status(500).json({
             error: 'Internal server error',
             message: error.message
@@ -89,11 +74,9 @@ const list  = (req, res) => {
 };
 
 
-
 module.exports = {
     create,
     read,
-    readMy,
     update,
     remove,
     list
