@@ -16,6 +16,12 @@ const RequestSchema  = new mongoose.Schema({
     specification: {
         type: String,
         required: true
+    },
+    userId:{
+        type:String,
+    },
+    senUserName:{
+        type: String,
     }
 });
 
