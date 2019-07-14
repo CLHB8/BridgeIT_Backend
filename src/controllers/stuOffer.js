@@ -10,9 +10,9 @@ const create = (req, res) => {
     });
 
     StuOfferModel.create(req.body)
-        .then(request => res.status(201).json(request))
+        .then(stuOffer => res.status(201).json(stuOffer))
         .catch(error => res.status(500).json({
-            error: 'Internal server error',
+            error: 'Internal server error create',
             message: error.message
         }));
 };
@@ -30,7 +30,7 @@ const read   = (req, res) => {
 
         })
         .catch(error => res.status(500).json({
-            error: 'Internal Server Error',
+            error: 'Internal Server Error read',
             message: error.message
         }));
 
@@ -50,7 +50,7 @@ const update = (req, res) => {
         runValidators: true}).exec()
         .then(stuOffer => res.status(200).json(stuOffer))
         .catch(error => res.status(500).json({
-            error: 'Internal server error',
+            error: 'Internal server error update',
             message: error.message
         }));
 };
@@ -59,7 +59,7 @@ const remove = (req, res) => {
     StuOfferModel.findByIdAndRemove(req.params.id).exec()
         .then(() => res.status(200).json({message: `Your Student Offer with id${req.params.id} was deleted`}))
         .catch(error => res.status(500).json({
-            error: 'Internal server error',
+            error: 'Internal server error remove',
             message: error.message
         }));
 };
@@ -68,7 +68,7 @@ const list  = (req, res) => {
     StuOfferModel.find({}).exec()
         .then(stuOffers => res.status(200).json(stuOffers))
         .catch(error => res.status(500).json({
-            error: 'Internal server error',
+            error: 'Internal server error list',
             message: error.message
         }));
 };
