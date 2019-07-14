@@ -18,6 +18,14 @@ const StuOfferSchema  = new mongoose.Schema({
         type:String,
         required: true
     },
+    seniorUsername:{
+        type:String,
+        required: true
+    },
+    studentUsername:{
+        type:String,
+        required: true
+    },
     studentId:{
         type:String,
         required: true
