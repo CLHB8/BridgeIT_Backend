@@ -27,11 +27,12 @@ const login = (req,res) => {
 
             // if user is found and password is valid
             // create a token
-            const token = jwt.sign({ id: user._id, username: user.username }, config.JwtSecret, {
+            const token = jwt.sign({ id: user._id, username: user.username}, config.JwtSecret, {
                 expiresIn: 86400 // expires in 24 hours
             });
 
-            res.status(200).json({token: token});
+            res.append('isSenior', user.isSenior);
+            res.status(200).json({token: token, isSenior: user.isSenior});
 
         })
         .catch(error => res.status(404).json({
@@ -103,6 +104,7 @@ const me = (req, res) => {
             message: error.message
         }));
 };
+
 
 const logout = (req, res) => {
     res.status(200).send({ token: null });

@@ -39,7 +39,7 @@ const readMy   = (req, res) => {
         .then(request => {
             if (!request) return res.status(404).json({
                 error: 'Not Found',
-                message: `Request not found  mal 3`
+                message: `Request not found`
             });
             res.status(200).json(request)
 
