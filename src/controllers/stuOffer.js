@@ -17,7 +17,7 @@ const create = (req, res) => {
         }));
 };
 
-const read   = (req, res) => {
+const read = (req, res) => {
     StuOfferModel.findById(req.params.id).exec()
         .then(stuOffer => {
 
@@ -33,10 +33,9 @@ const read   = (req, res) => {
             error: 'Internal Server Error read',
             message: error.message
         }));
-
 };
 
-const readMy   = (req, res) => {
+const readMy = (req, res) => {
     StuOfferModel.find({studentId: req.params.id}).exec()
         .then(request => {
             if (!request) return res.status(404).json({
@@ -53,7 +52,7 @@ const readMy   = (req, res) => {
 
 };
 
-const readReqOffers   = (req, res) => {
+const readReqOffers = (req, res) => {
     StuOfferModel.find({requestId: req.params.id}).exec()
         .then(request => {
             if (!request) return res.status(404).json({
@@ -72,17 +71,17 @@ const readReqOffers   = (req, res) => {
 
 
 const update = (req, res) => {
-    if (Object.keys(req.body).length === 0)
-    {
+    if (Object.keys(req.body).length === 0) {
         return res.status(400).json({
             error: 'Bad Request',
             message: 'The request body is empty'
         });
     }
 
-    StuOfferModel.findByIdAndUpdate(req.params.id,req.body,{
+    StuOfferModel.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
-        runValidators: true}).exec()
+        runValidators: true
+    }).exec()
         .then(stuOffer => res.status(200).json(stuOffer))
         .catch(error => res.status(500).json({
             error: 'Internal server error update',
@@ -99,7 +98,7 @@ const remove = (req, res) => {
         }));
 };
 
-const list  = (req, res) => {
+const list = (req, res) => {
     StuOfferModel.find({}).exec()
         .then(stuOffers => res.status(200).json(stuOffers))
         .catch(error => res.status(500).json({
