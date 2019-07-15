@@ -70,7 +70,7 @@ const register = (req,res) => {
 
         })
         .catch(error => {
-            if(error.code == 11000) {
+            if(error.code === 11000) {
                 res.status(400).json({
                     error: 'User exists',
                     message: error.message
