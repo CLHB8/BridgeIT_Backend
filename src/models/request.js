@@ -22,6 +22,9 @@ const RequestSchema  = new mongoose.Schema({
     },
     senUserName:{
         type: String,
+    },
+    assigned:{
+        type: String,
     }
 });
 
