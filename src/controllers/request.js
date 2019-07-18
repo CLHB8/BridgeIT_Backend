@@ -34,7 +34,7 @@ const create = (req, res) => {
         }));
 
 };
-    const readMy   = (req, res) => {
+const readMy   = (req, res) => {
     RequestModel.find({userId: req.params.id}).exec()
         .then(request => {
             if (!request) return res.status(404).json({
