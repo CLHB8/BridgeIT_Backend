@@ -30,9 +30,7 @@ const login = (req,res) => {
                 expiresIn: 86400 // expires in 24 hours
             });
 
-            res.append('isSenior', user.isSenior);
-            res.append('test', user.isPremium);
-            res.status(200).json({token: token, isSenior: user.isSenior})
+            res.status(200).json({token: token, isSenior: user.isSenior, isPremium: user.isPremium})
 
         })
         .catch(error => res.status(404).json({
