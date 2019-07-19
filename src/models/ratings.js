@@ -19,10 +19,12 @@ const RatingSchema  = new mongoose.Schema({
         required: true
     },
     RatingByStudent:{
-        type: Number
+        type: Number,
+        default: -1
     },
     RatingBySenior:{
-        type: Number
+        type: Number,
+        default: -1
     },
 });
 
