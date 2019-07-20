@@ -2,14 +2,13 @@
 
 const RatingsModel = require('../models/ratings');
 
-
-const read = (req, res) => {
+const readById = (req, res) => {
     RatingsModel.findById(req.params.id).exec()
         .then(stuOffer => {
 
             if (!stuOffer) return res.status(404).json({
                 error: 'Not Found',
-                message: `stuOffer not found`
+                message: `No entry with this ID found.`
             });
 
 
@@ -20,6 +19,22 @@ const read = (req, res) => {
             error: 'Internal Server Error read',
             message: error.message
         }));
+};
+
+const readByReqId = (req, res) => {
+    RatingsModel.find({requestId: req.params.id}).exec()
+        .then(request => {
+            if (!request) return res.status(404).json({
+                error: 'Not Found',
+                message: `No Entry with this RequestId found.`
+            });
+            res.status(200).json(request)
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+
 };
 
 const readStuRatings = (req, res) => {
@@ -84,7 +99,7 @@ const createRating = (req,res) => {
 
 };
 
-const update = (req, res) => {
+const updateById = (req, res) => {
     if (Object.keys(req.body).length === 0) {
         return res.status(400).json({
             error: 'Bad Request',
@@ -102,6 +117,42 @@ const update = (req, res) => {
             message: error.message
         }));
 };
+
+const updateByReqId = (req, res) => {
+    if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({
+            error: 'Bad Request',
+            message: 'The request body is empty'
+        });
+    }
+
+    RatingsModel.find({requestId: req.params.id}).exec()
+        .then(request => {
+            if (!request) return res.status(404).json({
+                error: 'Not Found',
+                message: `No Entry with this RequestId found.`
+            });
+            if (request[1]) return res.status(405).json({
+                error: 'Two Entries found',
+                message: `There are two entries with the same requestID. Not allowed, fix your MongoDB`
+            });
+            RatingsModel.findByIdAndUpdate(request[0]._id, req.body, {
+                new: true,
+                runValidators: true
+            }).exec()
+                .then(updatedRating => res.status(201).json(updatedRating))
+                .catch(error => res.status(501).json({
+                    error: 'Internal server error update',
+                    message: error.message
+                }));
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+};
+
+
 /*
 const remove = (req, res) => {
     RatingsModel.findByIdAndRemove(req.params.id).exec()
@@ -124,8 +175,10 @@ const list = (req, res) => {
 
 module.exports = {
     createRating,
-    read,
+    readById,
+    readByReqId,
     readStuRatings,
     readSenRatings,
-    update
+    updateById,
+    updateByReqId
 };
