@@ -10,7 +10,7 @@ const StuOfferSchema  = new mongoose.Schema({
         type: String,
         required: true
     },
-    requestTitle: {
+    requestCategory: {
         type: String,
         required: true
     },
