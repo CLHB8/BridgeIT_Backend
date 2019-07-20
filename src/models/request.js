@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const RequestSchema  = new mongoose.Schema({
     title: {
         type: String,
-        required: true
     },
     category: {
         type: String,
