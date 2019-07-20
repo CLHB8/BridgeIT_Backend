@@ -22,10 +22,10 @@ const login = (req,res) => {
 
             // check if the password is valid
             const isPasswordValid = bcrypt.compareSync(req.body.password, user.password);
-            if (!isPasswordValid) return res.status(407).json({
-                error: 'Incorrect Password',
-                message: "Check your password"
-            })
+            if (!isPasswordValid) return res.status(401).json({
+                error: 'TEST',
+                message: "TEST"
+            });
 
             // if user is found and password is valid
             // create a token
