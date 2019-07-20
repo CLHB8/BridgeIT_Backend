@@ -26,7 +26,6 @@ const UserSchema  = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-
     },
     phone_number: {
         type: String,
@@ -44,12 +43,16 @@ const UserSchema  = new mongoose.Schema({
         type: String,
         required: true
     },
+    postalcode: {
+        type: String,
+        required: true
+    },
     isSenior: {
         type: Boolean,
         required: true
     },
-    postalcode: {
-        type: String,
+    isPremium: {
+        type: Boolean,
         required: true
     }
 });

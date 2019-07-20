@@ -6,7 +6,6 @@ const bcrypt     = require('bcryptjs');
 const config     = require('../config');
 const UserModel  = require('../models/user');
 
-
 const login = (req,res) => {
     if (!Object.prototype.hasOwnProperty.call(req.body, 'password')) return res.status(400).json({
         error: 'Bad Request',
@@ -31,7 +30,7 @@ const login = (req,res) => {
                 expiresIn: 86400 // expires in 24 hours
             });
 
-            res.status(200).json({token: token});
+            res.status(200).json({token: token, isSenior: user.isSenior, isPremium: user.isPremium})
 
         })
         .catch(error => res.status(404).json({
