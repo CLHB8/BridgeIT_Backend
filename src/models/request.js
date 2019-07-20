@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const RequestSchema  = new mongoose.Schema({
     title: {
         type: String,
-        required: true
     },
     category: {
         type: String,
@@ -23,7 +22,10 @@ const RequestSchema  = new mongoose.Schema({
     senUserName:{
         type: String,
     },
-    assigned:{
+    isAssigned: {
+        type: Boolean,
+    },
+    assignedStudent: {
         type: String,
     }
 });

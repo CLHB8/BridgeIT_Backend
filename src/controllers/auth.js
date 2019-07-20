@@ -22,7 +22,10 @@ const login = (req,res) => {
 
             // check if the password is valid
             const isPasswordValid = bcrypt.compareSync(req.body.password, user.password);
-            if (!isPasswordValid) return res.status(401).send({token: null });
+            if (!isPasswordValid) return res.status(407).json({
+                error: 'Incorrect Password',
+                message: "Check your password"
+            })
 
             // if user is found and password is valid
             // create a token
@@ -31,8 +34,7 @@ const login = (req,res) => {
             });
 
             res.append('isSenior', user.isSenior);
-            res.append('test', user.isPremium);
-            res.status(200).json({token: token, isSenior: user.isSenior})
+            res.status(200).json({token: token, isSenior: user.isSenior, isPremium: user.isPremium})
 
         })
         .catch(error => res.status(404).json({
@@ -66,7 +68,8 @@ const register = (req,res) => {
                 expiresIn: 86400 // expires in 24 hours
             });
 
-            res.status(200).json({token: token});
+            res.append('isSenior', user.isSenior);
+            res.status(200).json({token: token, isSenior: user.isSenior});
 
 
         })
@@ -109,10 +112,67 @@ const logout = (req, res) => {
     res.status(200).send({ token: null });
 };
 
+const readUser = (req, res) => {
+    UserModel.findById(req.params.id).exec()
+        .then(user => {
+
+            if (!user) return res.status(404).json({
+                error: 'Not Found',
+                message: `User not found`
+            });
+
+            res.status(200).json(user)
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+};
+
+const isPremium = (req, res) => {
+    UserModel.findById(req.params.id).select('isPremium').exec()
+        .then(user => {
+
+            if (!user) return res.status(404).json({
+                error: 'Not Found',
+                message: `User not found`
+            });
+
+            res.status(200).json(user)
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+};
+
+const updateById = (req, res) => {
+    if (Object.keys(req.body).length === 0)
+    {
+        return res.status(400).json({
+            error: 'Bad Request',
+            message: 'The request body is empty'
+        });
+    }
+
+    UserModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    }).exec()
+        .then(updateUser => res.status(200).json(updateUser))
+        .catch(error => res.status(500).json({
+            error: 'Internal server error update',
+            message: error.message
+        }));
+};
+
 
 module.exports = {
     login,
     register,
     logout,
-    me
+    me,
+    readUser,
+    updateById,
+    isPremium
 };

@@ -10,6 +10,7 @@ const auth  = require('./routes/auth');
 const movie = require('./routes/movie');
 const request = require('./routes/request');
 const stuOffer = require('./routes/stuOffer');
+const ratings = require('./routes/ratings')
 
 const api = express();
 
@@ -33,6 +34,7 @@ api.use('/auth'  , auth);
 api.use('/movies', movie);
 api.use('/requests', request);
 api.use('/stuOffers', stuOffer);
+api.use('/ratings', ratings);
 
 
 
