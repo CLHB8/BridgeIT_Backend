@@ -22,7 +22,10 @@ const login = (req,res) => {
 
             // check if the password is valid
             const isPasswordValid = bcrypt.compareSync(req.body.password, user.password);
-            if (!isPasswordValid) return res.status(401).send({token: null });
+            if (!isPasswordValid) return res.status(407).json({
+                error: 'Incorrect Password',
+                message: "Check your password"
+            })
 
             // if user is found and password is valid
             // create a token
@@ -30,6 +33,7 @@ const login = (req,res) => {
                 expiresIn: 86400 // expires in 24 hours
             });
 
+            res.append('isSenior', user.isSenior);
             res.status(200).json({token: token, isSenior: user.isSenior, isPremium: user.isPremium})
 
         })
@@ -65,7 +69,7 @@ const register = (req,res) => {
             });
 
             res.append('isSenior', user.isSenior);
-            res.status(200).json({token: token});
+            res.status(200).json({token: token, isSenior: user.isSenior});
 
 
         })
