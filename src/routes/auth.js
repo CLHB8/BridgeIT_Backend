@@ -17,6 +17,7 @@ router.get('/user/:id', middlewares.checkAuthentication, AuthController.readUser
 router.get('/premium/:id' , AuthController.isPremium);
 
 router.put('/:id', middlewares.checkAuthentication, AuthController.updateById); // Update a User Information by Id
+router.put('/edit/:id', middlewares.checkAuthentication, AuthController.updateById); // Update a User Information by Id
 
 
 module.exports = router;
