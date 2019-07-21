@@ -7,7 +7,6 @@ const helmet     = require('helmet');
 const middlewares = require('./middlewares');
 
 const auth  = require('./routes/auth');
-const movie = require('./routes/movie');
 const request = require('./routes/request');
 const stuOffer = require('./routes/stuOffer');
 const ratings = require('./routes/ratings')
@@ -31,7 +30,6 @@ api.get('/', (req, res) => {
 
 // API routes (edited by Neil: needed access from frontend)
 api.use('/auth'  , auth);
-api.use('/movies', movie);
 api.use('/requests', request);
 api.use('/stuOffers', stuOffer);
 api.use('/ratings', ratings);
