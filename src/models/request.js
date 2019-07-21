@@ -27,6 +27,9 @@ const RequestSchema  = new mongoose.Schema({
     },
     assignedStudent: {
         type: String,
+    },
+    assignedStudentMail: {
+        type: String
     }
 });
 

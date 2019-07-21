@@ -174,6 +174,40 @@ const isPremium = (req, res) => {
         }));
 };
 
+const getPhoneNumber = (req, res) => {
+    UserModel.findById(req.params.id).select('phone_number').exec()
+        .then(user => {
+
+            if (!user) return res.status(404).json({
+                error: 'Not Found',
+                message: `User not found`
+            });
+
+            res.status(200).json(user)
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+};
+
+const getMail = (req, res) => {
+    UserModel.findById(req.params.id).select('mail').exec()
+        .then(user => {
+
+            if (!user) return res.status(404).json({
+                error: 'Not Found',
+                message: `User not found`
+            });
+
+            res.status(200).json(user)
+        })
+        .catch(error => res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        }));
+};
+
 const updateById = (req, res) => {
     if (Object.keys(req.body).length === 0) {
         return res.status(400).json({
@@ -202,5 +236,7 @@ module.exports = {
     readUser,
     updateById,
     isPremium,
-    readUserById
+    readUserById,
+    getMail,
+    getPhoneNumber
 };
