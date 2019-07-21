@@ -33,6 +33,10 @@ const StuOfferSchema  = new mongoose.Schema({
     introMsg:{
         type: String,
         required: true
+    },
+    wage:{
+        type: Number,
+        required: true
     }
 });
 
