@@ -1,5 +1,6 @@
 
 
+
 # BridgeIT-Backend application
 
 BridgeIT-Frontend application can be found [here](https://github.com/CLHB8/BridgeIT_Frontend)

@@ -147,6 +147,7 @@ const readUserById = (req, res) => {
                 cityname: user.cityname,
                 postalcode: user.postalcode,
                 isPremium: user.isPremium,
+                phone_number: user.phone_number,
             };
 
             res.status(200).json(restrictedUserInformation)
